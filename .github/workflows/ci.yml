@@ -1,28 +1,26 @@
-name: Java CI with Maven
+name: Java CI
 
 on:
   push:
-    branches:
-      - main   # Chạy khi có thay đổi trên nhánh 'main'
+    branches: [ master ]
   pull_request:
-    branches:
-      - main   # Chạy khi có pull request vào nhánh 'main'
+    branches: [ master ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest   # Chạy trên môi trường Ubuntu mới nhất
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2    # Check out mã nguồn từ kho lưu trữ
+    - uses: actions/checkout@v3
 
-    - name: Set up JDK 11
-      uses: actions/setup-java@v2
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
       with:
-        java-version: '11'    # Cài đặt JDK phiên bản 11
+        java-version: '17'
+        distribution: 'temurin'
 
-    - name: Build with Maven
-      run: mvn clean install   # Chạy lệnh Maven để build dự án và kiểm tra các bài test
+    - name: Give permission to gradlew
+      run: chmod +x gradlew
 
-    - name: Run tests
-      run: mvn test   # Chạy lệnh Maven để thực thi các bài kiểm tra JUnit
+    - name: Build and test
+      run: ./gradlew test
