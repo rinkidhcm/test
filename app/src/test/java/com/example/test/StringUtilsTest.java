@@ -16,4 +16,10 @@ public class StringUtilsTest {
     public void testIsPalindrome_null() {
         assertFalse(StringUtils.isPalindrome(null));
     }
+    @Test
+    public void testIsPalindrome_fail() {
+        // Đây là một chuỗi không phải là palindrome, nhưng chúng ta giả sử là nó đúng
+        assertTrue(StringUtils.isPalindrome("Hello"));
+    }
+
 }
