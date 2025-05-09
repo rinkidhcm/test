@@ -22,5 +22,11 @@ jobs:
     - name: Give permission to gradlew
       run: chmod +x gradlew
 
-    - name: Build and test
-      run: ./gradlew testDebugUnitTest
+    - name: Run unit tests
+      run: ./gradlew test
+
+    - name: Upload test report
+      uses: actions/upload-artifact@v3
+      with:
+        name: junit-report
+        path: build/reports/tests/test/
